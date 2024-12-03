@@ -1,16 +1,17 @@
 package com.example.app_labs.services;
 
+import com.example.app_labs.dtos.PetNameTypeBreed;
 import com.example.app_labs.entities.Pet;
-import com.example.app_labs.repositories.PetRepository;
+import com.example.app_labs.daos.PetRepository;
 import com.example.app_labs.services.exceptions.BadDataException;
 import com.example.app_labs.services.exceptions.NonexistentRecordException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Data
@@ -77,4 +78,22 @@ public class PetServiceImpl implements PetService {
     public List<Pet> getPetsByBreed(String breed) {
         return petRepository.findPetsByBreed(breed);
     }
+
+    @Override
+    public List<PetNameTypeBreed> getPetsNameTypeBreed() {
+        List<Pet> pet_list = petRepository.findAll();
+        return pet_list.stream().map(pet -> new PetNameTypeBreed(pet.getName(), pet.getAnimalType(), pet.getBreed())).toList();
+    }
+
+    @Override
+    public float getAverageAge() {
+        return petRepository.findAverageAge();
+    }
+
+    @Override
+    public int getOldestAge() {
+        return petRepository.findMaxAge();
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package com.example.app_labs.services;
 
+import com.example.app_labs.dtos.PetNameTypeBreed;
 import com.example.app_labs.entities.Pet;
 import com.example.app_labs.services.exceptions.BadDataException;
 import com.example.app_labs.services.exceptions.NonexistentRecordException;
@@ -15,5 +16,7 @@ public interface PetService {
     void deletePetByName(String name) throws NonexistentRecordException;
     List<Pet> getPetsByType(String type);
     List<Pet> getPetsByBreed(String breed);
-
+    List<PetNameTypeBreed> getPetsNameTypeBreed();
+    float getAverageAge();
+    int getOldestAge();
 }

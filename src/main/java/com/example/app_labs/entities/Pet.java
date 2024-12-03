@@ -3,7 +3,6 @@ package com.example.app_labs.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-        import org.springframework.context.annotation.Bean;
 
 @Data
 @Getter
@@ -22,10 +21,15 @@ public class Pet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    public Pet(String name, String animalType, String breed, int age) {
+    @ManyToOne
+    @JoinColumn(name="household_eircode")
+    Household household;
+
+    public Pet(String name, String animalType, String breed, int age, Household household) {
         this.name = name;
         this.animalType = animalType;
         this.breed = breed;
         this.age = age;
+        this.household = household;
     }
 }
